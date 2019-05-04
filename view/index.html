@@ -8,8 +8,19 @@
   <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
+  <div id="message">
+    <div id="message-header">
+      <div id="message-title">
+        Информация
+      </div>
+      <div id="btn-close"></div>
+    </div>
+    <div id="message-body">
+      Не все поля заполнены!
+    </div>
+  </div>
   <div id="container">
-    <div id="registration" class="hidden">
+    <div id="registration" class="">
       <h1>Регистрация</h1>
       <form action="">
         <input type="text" name="login" placeholder="Логин" autocomplete="off">
@@ -30,7 +41,7 @@
       </form>
       <a href="#">Регистрация</a>
     </div>
-    <div id="personal-room" class="">
+    <div id="personal-room" class="hidden">
       <h1>Личный кабинет</h1>
       <p>Hello, [пользователь]!</p>
       <button>Выйти</button>

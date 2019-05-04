@@ -9,7 +9,38 @@ html {
 .hidden {
   display: none;
 }
+/* Информационное сообщение */
+#message {
+  width: 406px;
+  border: 3px solid #d71a1a;
+  position: absolute;
+  margin-top: 100px;
+  margin-left: calc(50% - 206px);
+  background: #fff;
+}
+#message-header {
+  background: #d71a1a;
+  height: 32px;
+}
+#message #message-title {
+  width: calc(100% - 29px);
+  padding: 8px 0;
+  float: left;
+  text-align: center;
+  color: #fff;
+}
+#message #btn-close {
+  width: 26px;
+  height: 32px;
+  float: left;
+  background: url(../images/btn-close.png) center center;
+  cursor: pointer;
+}
+#message #message-body {
+  padding: 10px;
+}
 
+/* Основная часть стилей */
 #container {
   width: 406px;
   margin: 80px auto 0 auto;
