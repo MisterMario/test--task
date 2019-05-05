@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- БД приложения -->
+<table>
+  <row>
+    <login>root</login>
+    <password>root</password>
+    <email>root@test.loc</email>
+    <name>SuperUser</name>
+  </row>
+  <row>
+    <login>iva</login>
+    <password>iva</password>
+    <email>iva@test.loc</email>
+    <name>Ivan Alexandrovich</name>
+  </row>
+</table>
