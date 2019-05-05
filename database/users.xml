@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <table>
+  <!--Первая строка определяет структуру таблицы-->
+  <row>
+    <login></login>
+    <password></password>
+    <email></email>
+    <name></name>
+  </row>
+  <!--Обычные данные-->
   <row>
     <login>root</login>
     <password>root</password>

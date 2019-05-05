@@ -15,6 +15,7 @@ class XMLDB {
 
   public function __construct() {}
 
+  // Необходимо добавить возможность использования условий при выборках (select), изменении (update) и удалении (delete)
   public function select($table_name, $fields, $rows_num = -1) {
     $simple_xml_el = simplexml_load_file("database/".$table_name.".xml");
 
