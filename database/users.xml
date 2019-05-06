@@ -2,10 +2,10 @@
 <table>
   <!--Первая строка определяет структуру таблицы-->
   <row>
-    <login></login>
-    <password></password>
-    <email></email>
-    <name></name>
+    <login/>
+    <password/>
+    <email/>
+    <name/>
   </row>
   <!--Обычные данные-->
   <row>
