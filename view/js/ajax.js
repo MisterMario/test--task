@@ -6,10 +6,14 @@ function ajax(handler, params, callback, isAsync = true) {
     type: 'POST',
     data: JSON.stringify(params),
     contentType: 'application/json; charset=utf-8',
-    //dataType: 'json',
+    dataType: 'json',
     success: callback,
     async: isAsync,
   });
+}
+
+function showMessageBox(text) {
+  alert(text);
 }
 
 function sendRegistrationData() {
@@ -78,12 +82,11 @@ function sendAuthorizationData() {
     showMessageBox('Ошибка: не все поля заполнены!');
   else
     ajax('ajax_login.php', data, function(data) {
-      $('body').html(data);
-      /*if (data.status) {
+      if (data.status) {
         $('#authorization').addClass('hidden');
         $('#personal-room').removeClass('hidden');
         $('#personal-room p span').html(data.message);
-      } else showMessageBox("Ошибка: " + data.message);*/
+      } else showMessageBox("Ошибка: " + data.message);
 
     });
 }

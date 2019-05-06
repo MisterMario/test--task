@@ -5,11 +5,18 @@
 require_once("db.php");
 require_once("auth.class.php");
 
-$xmlDB = new XMLDB();
-
 session_start();
 $user_name = Auth::createUser();
-var_dump($user_name);
+
+$registration_class = "hidden";
+$authorization_class = "hidden";
+$pr_class = "hidden";
+
+if ($user_name == null) {
+  $authorization_class = "";
+} else {
+  $pr_class = "";
+}
 
 include "view/index.html";
 

@@ -41,11 +41,14 @@ class Auth {
     session_unset();
     session_destroy();
     if (isset($_COOKIE["pr-v1-login"])) {
-      setcookie("pr-v1-login", "", time()-3600, "/");
-      setcookie("pr-v1-tmp", "", time()-3600, "/");
-
       $xmlDB = new xmlDB();
-      if ($xmlDB->update("users", array("tmp"=>"", "session_id"=>""), array("login"=>$data["login"]))) return true;
+
+      if ($xmlDB->update("users", array("tmp"=>"", "session_id"=>""), array("login"=>$_COOKIE["pr-v1-login"]))) {
+        setcookie("pr-v1-login", "", time()-3600, "/");
+        setcookie("pr-v1-tmp", "", time()-3600, "/");
+
+        return true;
+      }
     }
     return false;
   }
