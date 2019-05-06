@@ -8,6 +8,7 @@ $answer = array("status" => false, "message" => "");
 
 require_once("db.php");
 require_once("cryptor.php");
+require_once("auth.class.php");
 
 
 if (!isset($data["login"]) || !isset($data["password"]))
@@ -21,10 +22,12 @@ if (strlen($answer["message"]) == 0) {
   $xmlDB = new XMLDB();
   $selection = $xmlDB->select("users", array("password", "name"), array("login"=>$data["login"]));
   if (count($selection) > 0) {
-    
+
     if (Cryptor::confirmPasswords($data["password"], $selection[0]["password"])) {
 
-      // создание кукисов и сессии
+      session_start();
+      Auth::sessionCreate(array("login" => $data["login"], "name" => $selection[0]["name"]));
+
       $answer["status"] = true;
       $answer["message"] = $selection[0]["name"];
 
