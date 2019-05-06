@@ -29,7 +29,7 @@ function sendRegistrationData() {
   else if (data.repassword.length == 0)
     error_code = 0;
   else if (data.email.length == 0)
-    check_was_successful = false;
+    error_code = false;
   else if (data.name.length == 0)
     error_code = 0;
   else if (data.password != data.repassword)
@@ -41,12 +41,12 @@ function sendRegistrationData() {
 
   if (error_code == -1) {
     ajax('ajax_register.php', data, function(data) {
-
       if (data.status) {
         $('#registration').addClass('hidden');
         $('#authorization').removeClass('hidden');
+        message = 'Вы успешно зарегистрированы!';
       } else message += data.message;
-
+      showMessageBox(message);
     });
   }
 
@@ -63,22 +63,19 @@ function sendRegistrationData() {
     case 3:
       message += 'пароль должен содержать от 4 до 32-х символов!';
       break;
-    default:
-      if (message == "Ошибка: ") message = 'Вы успешно зарегистрированы!';
   }
 
-  showMessageBox(message);
+  if (error_code != -1 ) showMessageBox(message);
 }
 
 function sendAuthorizationData() {
   var data = {
     login: $('#authorization input[name=login]').val(),
     password: $('#authorization input[name=pass]').val(),
-  },
-    message = 'Ошибка: ';
+  };
 
   if (login.length == 0 || repassword.length == 0)
-    message += 'не все поля заполнены!';
+    showMessageBox('Ошибка: не все поля заполнены!');
 
   if (message.length != 0) {
     ajax('ajax_login.php', data, function(data) {
@@ -87,12 +84,10 @@ function sendAuthorizationData() {
         $('#authorization').addClass('hidden');
         $('#personal-room').removeClass('hidden');
         $('#personal-room p span').val(data.message);
-      } else message += data.message;
+      } else showMessageBox(data.message);
 
     });
   }
-
-  showMessageBox(message);
 }
 
 function logout() {
@@ -101,7 +96,7 @@ function logout() {
     if (data.status) {
       $('#personal-room').addClass('hidden');
       $('#authorization').removeClass('hidden');
-    } else message += data.message;
+    } else showMessageBox(data.message);
 
   });
 }
