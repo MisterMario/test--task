@@ -31,14 +31,25 @@ if (strlen($answer["message"]) == 0) {
 
   $xmlDB = new XMLDB();
 
-  $user_info = array(
-    "login" => $data["login"],
-    "password" => Cryptor::encryptText($data["password"]),
-    "email" => $data["email"],
-    "name" => $data["name"],
-  );
-  $answer["status"] = $xmlDB->insert("users", $user_info);
-  if (!$answer["status"]) $answer["message"] = "Ошибка при добавлении новой записи в БД!";
+  $selection_by_login = $xmlDB->select("users", array("name"), array("login" => $data["login"]), 1);
+  $selection_by_email = $xmlDB->select("users", array("name"), array("email" => $data["email"]), 1);
+
+  if (count($selection_by_login) != 0)
+    $answer["message"] = "пользователь с таким логином уже зарегистрирован!";
+  elseif (count($selection_by_email) != 0)
+    $answer["message"] = "этот e-mail уже использовался при регистрации!";
+  else {
+
+    $user_info = array(
+      "login" => $data["login"],
+      "password" => Cryptor::encryptText($data["password"]),
+      "email" => $data["email"],
+      "name" => $data["name"],
+    );
+    $answer["status"] = $xmlDB->insert("users", $user_info);
+    if (!$answer["status"]) $answer["message"] = "Ошибка при добавлении новой записи в БД!";
+
+  }
 }
 
 

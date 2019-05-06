@@ -10,14 +10,8 @@
   <!--Обычные данные-->
   <row>
     <login>root</login>
-    <password>root</password>
+    <password>5cd037faa273de18070b51a44c319e0eb0fe7a015f</password>
     <email>root@test.loc</email>
     <name>SuperUser</name>
-  </row>
-  <row>
-    <login>iva</login>
-    <password>iva</password>
-    <email>iva@test.loc</email>
-    <name>Ivan Alexandrovich</name>
   </row>
 </table>

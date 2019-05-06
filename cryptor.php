@@ -10,7 +10,7 @@ class Cryptor {
     return $salt . md5($salt . $text);
   }
 
-  public static function confirmPassword($pass, $hash) {
+  public static function confirmPasswords($pass, $hash) {
     $salt = substr($hash, 0, 10);
     if (self::getHash($pass, $salt) == $hash) return true;
 

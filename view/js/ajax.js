@@ -74,20 +74,18 @@ function sendAuthorizationData() {
     password: $('#authorization input[name=pass]').val(),
   };
 
-  if (login.length == 0 || repassword.length == 0)
+  if (data.login.length == 0 || data.password.length == 0)
     showMessageBox('Ошибка: не все поля заполнены!');
-
-  if (message.length != 0) {
+  else
     ajax('ajax_login.php', data, function(data) {
 
       if (data.status) {
         $('#authorization').addClass('hidden');
         $('#personal-room').removeClass('hidden');
-        $('#personal-room p span').val(data.message);
-      } else showMessageBox(data.message);
+        $('#personal-room p span').html(data.message);
+      } else showMessageBox("Ошибка: " + data.message);
 
     });
-  }
 }
 
 function logout() {

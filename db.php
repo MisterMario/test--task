@@ -30,26 +30,30 @@ class XMLDB {
     $simple_xml_el = simplexml_load_file("database/".$table_name.".xml");
 
     if (isset($simple_xml_el->row) && count($simple_xml_el->row) > 1) { // Если БД не пуста
-      $rows = array();
+      $rows = array(); $i = 0;
+      $is_first_row = true; // Переменная флаг, которая позволит пропускать первую строку
+
       $count = count($simple_xml_el);
       if ($rows_num != -1 && $rows_num <= $count) $count = $rows_num;
 
-      // Извлечение нужных полей
-      for ($i=1; $i < $count; $i++) { // Первая строка определяет струтуру
-        if ($condition == null || self::checkRowByCondition($simple_xml_el->row[$i], $condition)) {
+      foreach ($simple_xml_el->row as $row) { // Извлечение нужных полей
+
+        if (!$is_first_row && ($condition == null || self::checkRowByCondition($row, $condition))) {
 
           $rows[$i] = array();
           foreach($fields as $field) {
-            if (isset($simple_xml_el->row[$i]->$field)) {
-              $rows[$i][$field] = (string)$simple_xml_el->row[$i]->$field;
+            if (isset($row->$field)) {
+              $rows[$i][$field] = (string)$row->$field;
             }
           }
-
+          $i++;
+          if ($i == $count) break;
         }
+        $is_first_row = false;
       }
-
       return $rows;
     }
+
     return null;
   }
 

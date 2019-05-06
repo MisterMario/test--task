@@ -5,6 +5,7 @@
 require_once("db.php");
 
 $xmlDB = new XMLDB();
+//var_dump($xmlDB->select("users", array("password", "name"), array("login"=>"root"), 1));
 
 include "view/index.html";
 
